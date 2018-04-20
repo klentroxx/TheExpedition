@@ -1,6 +1,5 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Dictionary;
+
 
 public class Felfedezo {
     private String nev;
@@ -9,8 +8,8 @@ public class Felfedezo {
     private int arany;
     private int hirnev;
     private int viszony;
-    private Dictionary <Targy, Integer> = new Dictionary <Targy, Integer>
-    private Csapattars[] szemelyzet = new Csapattars[3];
+    private ArrayList<Targy> hatizsak = new ArrayList<>();
+    private Csapattars[] csapattars = new Csapattars[3];
 
     public Felfedezo(String nev, int eletero, double energia, int arany, int hirnev, int viszony) {
         this.eletero = eletero;
@@ -20,12 +19,13 @@ public class Felfedezo {
         this.hirnev = hirnev;
         this.viszony = viszony;
     }
-    public Felfedezo(String[] szemelyzet){
-        this.szemelyzet = Arrays.copyOf(szemelyzet, szemelyzet.length);
-    }
 
     public String getNev() {
         return nev;
+    }
+
+    public void setNev(String nev) {
+        this.nev = nev;
     }
 
     public int getEletero() {
@@ -40,24 +40,40 @@ public class Felfedezo {
         return arany;
     }
 
+    public void setArany(int arany) {
+        this.arany = arany;
+    }
+
     public int getHirnev() {
         return hirnev;
+    }
+
+    public void setHirnev(int hirnev) {
+        this.hirnev = hirnev;
     }
 
     public int getViszony() {
         return viszony;
     }
 
-    public ArrayList<Targy> getSlot() {
-        return slot;
+    public void setViszony(int viszony) {
+        this.viszony = viszony;
     }
 
-    public String[] getSzemelyzet() {
-        return Arrays.copyOf(szemelyzet, szemelyzet.length);
+    public ArrayList<Targy> getHatizsak() {
+        return hatizsak;
     }
 
-    public void setNev(String nev) {
-        this.nev = nev;
+    public void setHatizsak(ArrayList<Targy> hatizsak) {
+        this.hatizsak = hatizsak;
+    }
+
+    public Csapattars[] getCsapattars() {
+        return csapattars;
+    }
+
+    public void setCsapattars(Csapattars[] csapattars) {
+        this.csapattars = csapattars;
     }
 
     public void setEletero(int eletero) {
@@ -81,23 +97,5 @@ public class Felfedezo {
 
     }
 
-    public void setArany(int arany) {
-        this.arany = arany;
-    }
 
-    public void setHirnev(int hirnev) {
-        this.hirnev = hirnev;
-    }
-
-    public void setViszony(int viszony) {
-        this.viszony = viszony;
-    }
-
-    public void setSlot(ArrayList<Targy> slot) {
-        this.slot = slot;
-    }
-
-    public void setSzemelyzet(String[] szemelyzet) {
-        this.szemelyzet = szemelyzet;
-    }
 }

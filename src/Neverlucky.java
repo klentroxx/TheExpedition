@@ -9,7 +9,7 @@ public class Neverlucky {
         if (random >= 1 && random <= 20) {
             csapattars.setSerulte(true);
             if (csapattars.isSerulte() && random >= 2 && random <= 7) {
-                felfedezo.setSzemelyzet(felfedezo.getSzemelyzet());
+                felfedezo.setCsapattars(felfedezo.getCsapattars());
             }
         } else if (random >= 21 && random <= 30) {
 
@@ -143,14 +143,19 @@ public class Neverlucky {
             for (int i = -3; i < 4; i++) {
                 for (int j = -3; j < 4; j++) {
                     if (segedterkep[i + 3][j + 3] != null) {
-                        if (segedterkep[i + 3][j + 3].getMezoTipus().equals("dzsungel")) {
-                            terkep[hegyY + i][hegyX + j].setMezoTipus(" szfold ");
-                        } else if (segedterkep[i + 3][j + 3].getMezoTipus().equals(" bozot  ")) {
-                            terkep[hegyY + i][hegyX + j].setMezoTipus(" szfold ");
-                        } else if (segedterkep[i + 3][j + 3].getMezoTipus().equals(" lbozot ")) {
-                            terkep[hegyY + i][hegyX + j].setMezoTipus("  lap   ");
-                        } else {
-                            terkep[hegyY + i][hegyX + j] = segedterkep[i + 3][j + 3];
+                        switch (segedterkep[i + 3][j + 3].getMezoTipus()) {
+                            case "dzsungel":
+                                terkep[hegyY + i][hegyX + j].setMezoTipus(" szfold ");
+                                break;
+                            case " bozot  ":
+                                terkep[hegyY + i][hegyX + j].setMezoTipus(" szfold ");
+                                break;
+                            case " lbozot ":
+                                terkep[hegyY + i][hegyX + j].setMezoTipus("  lap   ");
+                                break;
+                            default:
+                                terkep[hegyY + i][hegyX + j] = segedterkep[i + 3][j + 3];
+                                break;
                         }
                     }
                 }

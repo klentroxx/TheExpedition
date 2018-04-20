@@ -32,8 +32,8 @@ public class  Targy {
     Targy kincs = new Targy("Kincs", 200);
     //Gyumolcs, Hus, Csokolade, Kabitoszer, Whiskey, Kotel, Bozotvago, Faklya, Uveggolyo
     public void whiskey(Felfedezo felfedezo){
-        for (int i = 0; i < felfedezo.getSzemelyzet().length; ++i){
-            if (felfedezo.getSzemelyzet()[i].equals("Katona")){
+        for (int i = 0; i < felfedezo.getCsapattars().length; ++i){
+            if (felfedezo.getCsapattars()[i].equals("Katona")){
                 felfedezo.setEnergia(felfedezo.getEnergia() + (whiskey.energia * 1.2));
             } else {
                 felfedezo.setEnergia(felfedezo.getEnergia() + whiskey.energia);
@@ -41,8 +41,8 @@ public class  Targy {
         }
     }
     public void kabitoszer(Felfedezo felfedezo){
-        for (int i = 0; i < felfedezo.getSzemelyzet().length; ++i){
-            if (felfedezo.getSzemelyzet()[i].equals("Saman")){
+        for (int i = 0; i < felfedezo.getCsapattars().length; ++i){
+            if (felfedezo.getCsapattars()[i].equals("Saman")){
                 felfedezo.setEnergia(felfedezo.getEnergia() + (kabitoszer.energia * 1.2));
             } else {
                 felfedezo.setEnergia(felfedezo.getEnergia() + kabitoszer.energia);
@@ -59,12 +59,10 @@ public class  Targy {
         felfedezo.setEnergia(felfedezo.getEnergia() + gyumolcs.energia);
     }
     public void bozotvago(Felfedezo felfedezo, Mezo mezotipus){
-        if (felfedezo.getSlot().contains(bozotvago) && mezotipus.getMezoTipus().equals("dzsungel")){
+        if (felfedezo.getHatizsak().contains(bozotvago) && mezotipus.getMezoTipus().equals("dzsungel")){
             mezotipus.setMezoTipus(" szfold ");
         }
     }
-    public void faklya(Felfedezo felfedezo, Mezo mezotipus){
-        if (felfedezo.getSlot().contains(faklya))
-    }
+
 
 }

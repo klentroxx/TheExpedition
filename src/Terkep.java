@@ -87,7 +87,16 @@ public class Terkep {
 
         for(int i = 0; i < terkep[0].length; i++){
             for(int j = 0; j < terkep.length; j++){
-                System.out.print((terkep[i][j].isLathatoe() ? (terkep[i][j].isIttvagyunke() ? "|" + terkep[i][j].getMezoTipus() + "|" : " " + terkep[i][j].getMezoTipus() + " ") : " " + terkep[i][j].getMezoTipus() + " "));
+                if (terkep[i][j].isLathatoe()) {
+                    if (terkep[i][j].isIttvagyunke()) {
+                        System.out.print("|" + terkep[i][j].getMezoTipus() + "|");
+                    } else {
+                        System.out.print(" " + terkep[i][j].getMezoTipus() + " ");
+                    }
+                } else {
+                    System.out.print(" " + terkep[i][j].getMezoTipus() + " ");
+                }
+
             }
             System.out.println();
         }
@@ -133,9 +142,9 @@ public class Terkep {
                     }
                     break;
             }
-            for (int a = 0; a < felfedezo.getSzemelyzet().length; ++a){
+            for (int a = 0; a < felfedezo.getCsapattars().length; ++a){
 
-                    if(felfedezo.getSzemelyzet()[a] != null && felfedezo.getSzemelyzet()[a].equals("Felderito")){
+                    if(felfedezo.getCsapattars()[a] != null && felfedezo.getCsapattars()[a].equals("Felderito")){
                         csapattars.felderito(terkep, ittakarakterY, ittakarakterX);
                     } else {
                         for(int i = -1; i < 2; i++){

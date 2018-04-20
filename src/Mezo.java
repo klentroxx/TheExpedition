@@ -48,6 +48,10 @@ public class Mezo {
         this.lathatoe = lathatoe;
     }
 
+    public String toString(String s) {
+        return s;
+    }
+
 
     /** Mező típusok */
 

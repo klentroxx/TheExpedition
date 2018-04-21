@@ -1,23 +1,12 @@
-public class Csapattars {
-    private String csapattarsNev;
-    private boolean serulte;
-    private boolean fuggoe;
+package targyak;
 
-    public String getCsapattarsNev() {
-        return csapattarsNev;
-    }
+import karakterek.Csapattars;
+import terkep.Mezo;
+import karakterek.Felfedezo;
 
-    public void setCsapattarsNev(String csapattarsNev) {
-        this.csapattarsNev = csapattarsNev;
-    }
+public class Hasznal {
 
-    public boolean isSerulte() {
-        return serulte;
-    }
 
-    public void setSerulte(boolean serulte) {
-        this.serulte = serulte;
-    }
 
     public void kereskedo(){
 
@@ -34,4 +23,6 @@ public class Csapattars {
     public void bolcs(Felfedezo felfedezo){
         felfedezo.setViszony(felfedezo.getViszony() + 3);
     }
+
+
 }

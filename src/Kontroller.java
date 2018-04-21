@@ -1,23 +1,23 @@
-import java.io.*;
+import terkep.Terkep;
+import karakterek.Felfedezo;
 
-public class Kontroller{
-    public void start(){
+
+import java.util.Scanner;
+
+class Kontroller{
+    void start(){
         Terkep terkep = new Terkep();
         Felfedezo jatekos = new Felfedezo("", 100, 100, 250, 0, 3);
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Scanner sc = new Scanner(System.in);
 
         terkep.letrehoz();
-        terkep.kirajzol();
-        try {
-            String irany;
-            while (jatekos.getEletero() != 0 && jatekos.getEnergia() != 0) {
-                irany = br.readLine();
-                terkep.lepes(jatekos, irany);
-                terkep.kirajzol();
-            }
-            System.out.println(jatekos.getEletero() == 0 ? "Meghaltál" : "Elfogyott az energiád");
-        } catch (IOException io) {
-            io.printStackTrace();
+        terkep.kirajzol(jatekos);
+        String billentyu;
+        while (jatekos.getEletero() != 0 && jatekos.getEnergia() != 0) {
+            billentyu = sc.next();
+            terkep.billentyuk(jatekos, billentyu);
+            terkep.kirajzol(jatekos);
         }
+        System.out.println(jatekos.getEletero() == 0 ? "Meghaltál" : "Elfogyott az energiád");
     }
 }

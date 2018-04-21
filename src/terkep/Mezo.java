@@ -1,3 +1,5 @@
+package terkep;
+
 public class Mezo {
     /** Mezők tulajdonságai */
     private String mezoTipus;

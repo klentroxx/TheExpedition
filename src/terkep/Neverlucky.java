@@ -1,3 +1,8 @@
+package terkep;
+
+import karakterek.Csapattars;
+import karakterek.Felfedezo;
+
 import java.util.Random;
 
 public class Neverlucky {

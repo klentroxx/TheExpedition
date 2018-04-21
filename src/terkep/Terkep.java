@@ -1,3 +1,9 @@
+package terkep;
+
+import karakterek.Csapattars;
+import targyak.Hasznal;
+import karakterek.Felfedezo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Random;
@@ -20,6 +26,7 @@ public class Terkep {
     private int rand = r.nextInt(100) + 1;
     private Neverlucky neverlucky = new Neverlucky();
     private Csapattars csapattars = new Csapattars();
+    private Hasznal hasznal = new Hasznal();
 
     public void setVulkane(boolean vulkane) {
         this.vulkane = vulkane;
@@ -35,7 +42,7 @@ public class Terkep {
     private void intTerkep(int[][] intTerkep){
         Scanner sc = null;
         try {
-            sc = new Scanner(new File("src\\terkep1.txt"));
+            sc = new Scanner(new File("src\\terkep\\terkep1.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -85,8 +92,8 @@ public class Terkep {
         }
     }
 
-    public void kirajzol(){
-
+    public void kirajzol(Felfedezo felfedezo){
+        mezofelfedes(felfedezo);
         for(int i = 0; i < terkep[0].length; i++){
             for(int j = 0; j < terkep.length; j++){
                 if (terkep[i][j].isLathatoe()) {
@@ -96,69 +103,71 @@ public class Terkep {
                         System.out.print(" " + terkep[i][j].getMezoTipus() + " ");
                     }
                 } else {
-                    System.out.print(" " + terkep[i][j].getMezoTipus() + " ");
+                    System.out.print("   ????   ");
                 }
-
             }
             System.out.println();
         }
-
+    }
+    public void mezofelfedes(Felfedezo felfedezo){
+        if(felfedezo.getHatizsak().contains(null)){
+            hasznal.felderito(terkep, ittakarakterY, ittakarakterX);
+        } else {
+            for(int i = -1; i < 2; i++){
+                for (int j = -1; j < 2; j++){
+                    if(ittakarakterY + i >= 0 && ittakarakterX + j >= 0 && ittakarakterY + i < terkep[0].length && ittakarakterX + j < terkep.length) {
+                        terkep[ittakarakterY + i][ittakarakterX + j].setLathatoe(true);
+                    }
+                }
+            }
+        }
     }
 
-    public void lepes(Felfedezo felfedezo, String irany) {
-            switch(irany){
-                case "w":
-                    if (0 != ittakarakterY) {
-                        rand = r.nextInt(100) + 1;
-                        mezotpiusok(-1, 0, felfedezo);
-                        if (gejzire) neverlucky.gejzTerjedes(lepesszamlalo, terkep, this);
-                        if (vulkane) neverlucky.lavaTerjedes(lepesszamlalo, terkep, this);
-                        lepesszamlalo++;
-                    }
-                    break;
-                case "a":
-                    if (ittakarakterX != 0){
-                        rand = r.nextInt(100) + 1;
-                        mezotpiusok(0, -1, felfedezo);
-                        if (gejzire) neverlucky.gejzTerjedes(lepesszamlalo, terkep, this);
-                        if (vulkane) neverlucky.lavaTerjedes(lepesszamlalo, terkep, this);
-                        lepesszamlalo++;
-                    }
-                    break;
-                case "s":
-                    if(ittakarakterY != terkep[0].length - 1){
-                        rand = r.nextInt(100) + 1;
-                        mezotpiusok(1, 0, felfedezo);
-                        if (gejzire) neverlucky.gejzTerjedes(lepesszamlalo, terkep, this);
-                        if (vulkane) neverlucky.lavaTerjedes(lepesszamlalo, terkep, this);
-                        lepesszamlalo++;
-                    }
-                    break;
-                case "d":
-                    if(ittakarakterX != terkep.length - 1){
-                        rand = r.nextInt(100) + 1;
-                        mezotpiusok(0, 1, felfedezo);
-                        if (gejzire) neverlucky.gejzTerjedes(lepesszamlalo, terkep, this);
-                        if (vulkane) neverlucky.lavaTerjedes(lepesszamlalo, terkep, this);
-                        lepesszamlalo++;
-                    }
-                    break;
-            }
-            for (int a = 0; a < felfedezo.getCsapattars().length; ++a){
+    public void billentyuk(Felfedezo felfedezo, String billentyu) {
+        switch(billentyu){
+            case "w":
+                if (0 != ittakarakterY) {
+                    rand = r.nextInt(100) + 1;
+                    mezotpiusok(-1, 0, felfedezo);
+                    if (gejzire) neverlucky.gejzTerjedes(lepesszamlalo, terkep, this);
+                    if (vulkane) neverlucky.lavaTerjedes(lepesszamlalo, terkep, this);
+                    lepesszamlalo++;
+                }
+                break;
+            case "a":
+                if (ittakarakterX != 0){
+                    rand = r.nextInt(100) + 1;
+                    mezotpiusok(0, -1, felfedezo);
+                    if (gejzire) neverlucky.gejzTerjedes(lepesszamlalo, terkep, this);
+                    if (vulkane) neverlucky.lavaTerjedes(lepesszamlalo, terkep, this);
+                    lepesszamlalo++;
+                }
+                break;
+            case "s":
+                if(ittakarakterY != terkep[0].length - 1){
+                    rand = r.nextInt(100) + 1;
+                    mezotpiusok(1, 0, felfedezo);
+                    if (gejzire) neverlucky.gejzTerjedes(lepesszamlalo, terkep, this);
+                    if (vulkane) neverlucky.lavaTerjedes(lepesszamlalo, terkep, this);
+                    lepesszamlalo++;
+                }
+                break;
+            case "d":
+                if(ittakarakterX != terkep.length - 1){
+                    rand = r.nextInt(100) + 1;
+                    mezotpiusok(0, 1, felfedezo);
+                    if (gejzire) neverlucky.gejzTerjedes(lepesszamlalo, terkep, this);
+                    if (vulkane) neverlucky.lavaTerjedes(lepesszamlalo, terkep, this);
+                    lepesszamlalo++;
+                }
+                break;
+        }
 
-                    if(felfedezo.getCsapattars()[a] != null && felfedezo.getCsapattars()[a].equals("Felderito")){
-                        csapattars.felderito(terkep, ittakarakterY, ittakarakterX);
-                    } else {
-                        for(int i = -1; i < 2; i++){
-                            for (int j = -1; j < 2; j++){
-                                if(ittakarakterY + i >= 0 && ittakarakterX + j >= 0 && ittakarakterY + i < terkep[0].length && ittakarakterX + j < terkep.length) {
-                                    terkep[ittakarakterY + i][ittakarakterX + j].setLathatoe(true);
-                                }
-                            }
-                        }
-                    }
 
-            }
+
+
+
+
 
         System.out.println("HY: " + ittahajoY + " HX: " + ittahajoX + " KY: " + ittakarakterY +
                 " KX: " + ittakarakterX + " HStop: " + hajoStop + " HVane: " + hajonVanE +

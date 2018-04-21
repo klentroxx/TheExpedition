@@ -1,20 +1,17 @@
 public class Mezo {
     /** Mezők tulajdonságai */
-    private int mezoKod;
     private String mezoTipus;
     private boolean ittvagyunke = false;
     private boolean lathatoe = false;
 
     /** Konstruktorok */
-    public Mezo(int mezoKod, String mezoTipus) {
-        this.mezoKod = mezoKod;
+    public Mezo(String mezoTipus) {
         this.mezoTipus = mezoTipus;
     }
 
     public Mezo() {
     }
     public Mezo(Mezo mezo) {
-        this.mezoKod = mezo.mezoKod;
         this.mezoTipus = mezo.mezoTipus;
         this.ittvagyunke = false;
         this.lathatoe = mezo.lathatoe;

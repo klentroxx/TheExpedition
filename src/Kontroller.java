@@ -14,7 +14,6 @@ public class Kontroller{
                 irany = br.readLine();
                 terkep.lepes(jatekos, irany);
                 terkep.kirajzol();
-                System.out.println("enerjat: " + jatekos.getEnergia());
             }
             System.out.println(jatekos.getEletero() == 0 ? "Meghaltál" : "Elfogyott az energiád");
         } catch (IOException io) {

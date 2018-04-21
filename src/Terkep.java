@@ -11,6 +11,7 @@ public class Terkep {
     private int ittakarakterX = 0;
     private int ittakarakterY = 0;
     private int lepesszamlalo = 0;
+    private double lepeskoltseg = 1;
     private boolean hajonVanE;
     private boolean hajoStop;
     private boolean vulkane;
@@ -51,27 +52,28 @@ public class Terkep {
         intTerkep(intTerkep);
         for(int i = 0; i < terkep[0].length; i++){
             for(int j = 0; j < terkep.length; j++){
-                if (intTerkep[i][j] == 0){ terkep[i][j] = new Mezo(0, " tenger ");
-                } else if (intTerkep[i][j] == 1){ terkep[i][j] = new Mezo(1, "  hegy  ");
-                } else if (intTerkep[i][j] == 2){ terkep[i][j] = new Mezo(2, "  lava  ");
-                } else if (intTerkep[i][j] == 3){ terkep[i][j] = new Mezo(3, "  lap   ");
-                } else if (intTerkep[i][j] == 4){ terkep[i][j] = new Mezo(4, " szfold ");
-                } else if (intTerkep[i][j] == 5){ terkep[i][j] = new Mezo(5, "dzsungel");
-                } else if (intTerkep[i][j] == 6){ terkep[i][j] = new Mezo(6, "   to   ");
-                } else if (intTerkep[i][j] == 7){ terkep[i][j] = new Mezo(7, "hegyisz ");
-                } else if (intTerkep[i][j] == 8){ terkep[i][j] = new Mezo(8, "barlang ");
-                } else if (intTerkep[i][j] == 9){ terkep[i][j] = new Mezo(9, " bozot  ");
-                } else if (intTerkep[i][j] == 10){ terkep[i][j] = new Mezo(10, " lbozot ");
-                } else if (intTerkep[i][j] == 11){ terkep[i][j] = new Mezo(11, "  falu  ");
-                } else if (intTerkep[i][j] == 12){ terkep[i][j] = new Mezo(12, " lfalu  ");
-                } else if (intTerkep[i][j] == 13){ terkep[i][j] = new Mezo(13, " oltar  ");
-                } else if (intTerkep[i][j] == 14){ terkep[i][j] = new Mezo(14, " loltar ");
-                } else if (intTerkep[i][j] == 15){ terkep[i][j] = new Mezo(15, " aranyp ");
-                } else if (intTerkep[i][j] == 16){ terkep[i][j] = new Mezo(16, "laranyp ");
+                if (intTerkep[i][j] == 0){ terkep[i][j] = new Mezo(" tenger ");
+                } else if (intTerkep[i][j] == 1){ terkep[i][j] = new Mezo("  hegy  ");
+                } else if (intTerkep[i][j] == 2){ terkep[i][j] = new Mezo("  lava  ");
+                } else if (intTerkep[i][j] == 3){ terkep[i][j] = new Mezo("  lap   ");
+                } else if (intTerkep[i][j] == 4){ terkep[i][j] = new Mezo(" szfold ");
+                } else if (intTerkep[i][j] == 5){ terkep[i][j] = new Mezo("dzsungel");
+                } else if (intTerkep[i][j] == 6){ terkep[i][j] = new Mezo("   to   ");
+                } else if (intTerkep[i][j] == 7){ terkep[i][j] = new Mezo("hegyisz ");
+                } else if (intTerkep[i][j] == 8){ terkep[i][j] = new Mezo("barlang ");
+                } else if (intTerkep[i][j] == 9){ terkep[i][j] = new Mezo(" bozot  ");
+                } else if (intTerkep[i][j] == 10){ terkep[i][j] = new Mezo(" lbozot ");
+                } else if (intTerkep[i][j] == 11){ terkep[i][j] = new Mezo("  falu  ");
+                } else if (intTerkep[i][j] == 12){ terkep[i][j] = new Mezo(" lfalu  ");
+                } else if (intTerkep[i][j] == 13){ terkep[i][j] = new Mezo(" oltar  ");
+                } else if (intTerkep[i][j] == 14){ terkep[i][j] = new Mezo(" loltar ");
+                } else if (intTerkep[i][j] == 15){ terkep[i][j] = new Mezo(" aranyp ");
+                } else if (intTerkep[i][j] == 16){ terkep[i][j] = new Mezo("laranyp ");
                 }
             }
         }
         terkep[ittahajoY][ittahajoX].setIttvagyunke(true);
+        terkep[ittahajoY][ittahajoX].setMezoTipus("  hajo  ");
         hajonVanE = true;
         hajoStop = false;
         for(int i = -1; i < 2; i++){
@@ -174,15 +176,9 @@ public class Terkep {
                     ittahajoX += kx;
                     ittakarakterX += kx;
                     terkep[ittakarakterY][ittakarakterX].setIttvagyunke(true);
+                    terkep[ittahajoY][ittahajoX]. setMezoTipus("  hajo  ");
                     terkep[ittakarakterY - ky][ittakarakterX - kx].setIttvagyunke(false);
-                } else if(hajoStop && terkep[ittakarakterY + ky][ittakarakterX + kx] == terkep[ittahajoY][ittahajoX]){
-                    ittakarakterY += ky;
-                    ittakarakterX += kx;
-                    hajonVanE = true;
-                    terkep[ittakarakterY][ittakarakterX].setIttvagyunke(true);
-                    terkep[ittakarakterY - ky][ittakarakterX - kx].setIttvagyunke(false);
-                    felfedezo.setEnergia(100);
-                    felfedezo.setEletero(100);
+                    terkep[ittahajoY - ky][ittahajoX - kx].setMezoTipus(" tenger ");
                 }
                 break;
             case "  hegy  ":
@@ -190,39 +186,39 @@ public class Terkep {
             case "  lava  ":
                 if (terkep[ittakarakterY][ittakarakterX] == terkep[ittahajoY][ittahajoX]){
                     lepes1(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
                     felfedezo.setEletero(felfedezo.getEletero() - 30);
                 } else {
                     lepes2(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
                     felfedezo.setEletero(felfedezo.getEletero() - 30);
                 }
                 break;
             case "  lap   ":
                 if (terkep[ittakarakterY][ittakarakterX] == terkep[ittahajoY][ittahajoX]){
                     lepes1(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1.8);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - (lepeskoltseg * 1.8));
                 } else {
                     lepes2(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1.8);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - (lepeskoltseg * 1.8));
                 }
                 break;
             case " szfold ":
                 if (terkep[ittakarakterY][ittakarakterX] == terkep[ittahajoY][ittahajoX]){
                     lepes1(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
                 } else {
                     lepes2(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
                 }
                 break;
             case "dzsungel":
                 if (terkep[ittakarakterY][ittakarakterX] == terkep[ittahajoY][ittahajoX]){
                     lepes1(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 2);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - (lepeskoltseg * 2));
                 } else {
                     lepes2(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 2);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - (lepeskoltseg * 2));
                 }
                 break;
             case "   to   ":
@@ -230,102 +226,111 @@ public class Terkep {
             case "hegyisz ":
                 if (terkep[ittakarakterY][ittakarakterX] == terkep[ittahajoY][ittahajoX]){
                     lepes1(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
                     if (rand >= 1 && rand <= 20) neverlucky.atok(terkep, ittakarakterY, ittakarakterX, lepesszamlalo, this);
                 } else {
                     lepes2(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
                     if (rand >= 1 && rand <= 20) neverlucky.atok(terkep, ittakarakterY, ittakarakterX, lepesszamlalo, this);
                 }
                 break;
             case "barlang ":
                 if (terkep[ittakarakterY][ittakarakterX] == terkep[ittahajoY][ittahajoX]){
                     lepes1(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
                 } else {
                     lepes2(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
                 }
                 break;
             case " bozot  ":
                 if (terkep[ittakarakterY][ittakarakterX] == terkep[ittahajoY][ittahajoX]){
                     lepes1(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1.4);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - (lepeskoltseg * 1.4));
                 } else {
                     lepes2(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1.4);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - (lepeskoltseg * 1.4));
                 }
                 break;
             case " lbozot ":
                 if (terkep[ittakarakterY][ittakarakterX] == terkep[ittahajoY][ittahajoX]){
                     lepes1(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 2.2);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - (lepeskoltseg * 2.2));
                 } else {
                     lepes2(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 2.2);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - (lepeskoltseg * 2.2));
                 }
                 break;
             case "  falu  ":
                 if (terkep[ittakarakterY][ittakarakterX] == terkep[ittahajoY][ittahajoX]){
                     lepes1(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
                 } else {
                     lepes2(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
                 }
                 break;
             case " lfalu  ":
                 if (terkep[ittakarakterY][ittakarakterX] == terkep[ittahajoY][ittahajoX]){
                     lepes1(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1.8);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - (lepeskoltseg * 1.8));
                 } else {
                     lepes2(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1.8);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - (lepeskoltseg * 1.8));
                 }
                 break;
             case " oltar  ":
                 if (terkep[ittakarakterY][ittakarakterX] == terkep[ittahajoY][ittahajoX]){
                     lepes1(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
                     felfedezo.setViszony(felfedezo.getViszony() - 2);
                 } else {
                     lepes2(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
                     felfedezo.setViszony(felfedezo.getViszony() - 2);
                 }
                 break;
             case " loltar ":
                 if (terkep[ittakarakterY][ittakarakterX] == terkep[ittahajoY][ittahajoX]){
                     lepes1(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1.8);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - (lepeskoltseg * 1.8));
                     felfedezo.setViszony(felfedezo.getViszony() - 2);
                 } else {
                     lepes2(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1.8);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - (lepeskoltseg * 1.8));
                     felfedezo.setViszony(felfedezo.getViszony() - 2);
                 }
                 break;
             case " aranyp ":
                 if (terkep[ittakarakterY][ittakarakterX] == terkep[ittahajoY][ittahajoX]){
                     lepes1(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
                     felfedezo.setHirnev(felfedezo.getHirnev() + 1000);
                 } else {
                     lepes2(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
                     felfedezo.setHirnev(felfedezo.getHirnev() + 1000);
                 }
                 break;
             case "laranyp ":
                 if (terkep[ittakarakterY][ittakarakterX] == terkep[ittahajoY][ittahajoX]){
                     lepes1(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1.8);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - (lepeskoltseg * 1.8));
                     felfedezo.setHirnev(felfedezo.getHirnev() + 1000);
                 } else {
                     lepes2(ky, kx);
-                    felfedezo.setEnergia(felfedezo.getEnergia() - 1.8);
+                    felfedezo.setEnergia(felfedezo.getEnergia() - (lepeskoltseg * 1.8));
                     felfedezo.setHirnev(felfedezo.getHirnev() + 1000);
                 }
+                break;
+            case "  hajo  ":
+                ittakarakterY += ky;
+                ittakarakterX += kx;
+                hajonVanE = true;
+                terkep[ittakarakterY][ittakarakterX].setIttvagyunke(true);
+                terkep[ittakarakterY - ky][ittakarakterX - kx].setIttvagyunke(false);
+                felfedezo.setEnergia(100);
+                felfedezo.setEletero(100);
                 break;
             default:
                 System.err.println("Nincs ilyen mezo!");

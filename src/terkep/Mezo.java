@@ -1,45 +1,38 @@
 package terkep;
-
+/** Mezo class. A mezok definialasara szolgal.*/
 public class Mezo {
-    /** Mezők tulajdonságai */
     private String mezoTipus;
     private boolean ittvagyunke = false;
     private boolean lathatoe = false;
 
-    /** Konstruktorok */
-    public Mezo(String mezoTipus) {
+    Mezo(String mezoTipus) {
         this.mezoTipus = mezoTipus;
     }
 
-    public Mezo() {
-    }
-    public Mezo(Mezo mezo) {
+    Mezo(Mezo mezo) {
         this.mezoTipus = mezo.mezoTipus;
         this.ittvagyunke = false;
         this.lathatoe = mezo.lathatoe;
     }
 
-    /** Getterek */
 
     public String getMezoTipus() {
         return mezoTipus;
     }
 
-    public boolean isIttvagyunke() {
+    boolean isIttvagyunke() {
         return ittvagyunke;
     }
 
-    public boolean isLathatoe() {
+    boolean isLathatoe() {
         return lathatoe;
     }
 
-    /** Setterek */
-
-    public void setMezoTipus(String mezoTipus) {
+    void setMezoTipus(String mezoTipus) {
         this.mezoTipus = mezoTipus;
     }
 
-    public void setIttvagyunke(boolean ittvagyunke) {
+    void setIttvagyunke(boolean ittvagyunke) {
         this.ittvagyunke = ittvagyunke;
     }
 
@@ -47,12 +40,6 @@ public class Mezo {
         this.lathatoe = lathatoe;
     }
 
-    public String toString(String s) {
-        return s;
-    }
-
-
-    /** Mező típusok */
 
 
 

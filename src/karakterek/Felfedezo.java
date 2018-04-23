@@ -1,9 +1,9 @@
 package karakterek;
 
+import targyak.Kincs;
+
 import java.util.ArrayList;
-
-import targyak.Targy;
-
+/** Felfedezo class. Ez definialja a felfedezonket.*/
 public class Felfedezo {
     private String nev;
     private int eletero;
@@ -11,8 +11,8 @@ public class Felfedezo {
     private int arany;
     private int hirnev;
     private int viszony;
-    private ArrayList<Targy> hatizsak = new ArrayList<>();
-    private ArrayList<Csapattars> csapattars = new ArrayList<>(3);
+    private ArrayList<Csapattars> csapattars = new ArrayList<>();
+    private ArrayList<Kincs> kincstar = new ArrayList<>();
 
     public Felfedezo(String nev, int eletero, double energia, int arany, int hirnev, int viszony) {
         this.eletero = eletero;
@@ -22,6 +22,7 @@ public class Felfedezo {
         this.hirnev = hirnev;
         this.viszony = viszony;
     }
+
 
     public String getNev() {
         return nev;
@@ -63,20 +64,12 @@ public class Felfedezo {
         this.viszony = viszony;
     }
 
-    public ArrayList<Targy> getHatizsak() {
-        return hatizsak;
-    }
-
-    public void setHatizsak(ArrayList<Targy> hatizsak) {
-        this.hatizsak = hatizsak;
-    }
-
     public ArrayList<Csapattars> getCsapattars() {
         return csapattars;
     }
 
-    public void setCsapattars(ArrayList<Csapattars> csapattars) {
-        this.csapattars = csapattars;
+    public ArrayList<Kincs> getKincstar() {
+        return kincstar;
     }
 
     public void setEletero(int eletero) {
@@ -99,6 +92,5 @@ public class Felfedezo {
         }
 
     }
-
 
 }

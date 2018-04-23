@@ -1,28 +1,34 @@
 package terkep;
 
-import karakterek.Csapattars;
 import karakterek.Felfedezo;
 
 import java.util.Random;
-
-public class Neverlucky {
+/** Neverlucky class. Itt talalhato a katasztrofa es az atok megvalositasa.*/
+class Neverlucky {
     private int tmp2, hegyX, hegyY, gejzY, gejzX, lepteto = 1;
     private Mezo[][] segedterkep = new Mezo[7][7];
     private Random r = new Random();
-    private int random =r.nextInt(100) + 1;
-    public void katasztrofa(Felfedezo felfedezo, Csapattars csapattars, int random) {
+    private int random = r.nextInt(100) + 1;
+    void katasztrofa(Felfedezo felfedezo) {
         if (random >= 1 && random <= 20) {
-            csapattars.setSerulte(true);
-            if (csapattars.isSerulte() && random >= 2 && random <= 7) {
-                felfedezo.setCsapattars(felfedezo.getCsapattars());
-            }
+            serultTars(felfedezo);
         } else if (random >= 21 && random <= 30) {
-
+            int randtag = r.nextInt(3);
+            felfedezo.getCsapattars().remove(randtag);
+        } else if (random >= 31 && random <= 100) {
+            felfedezo.setEnergia(felfedezo.getEnergia() - 45);
         }
-
     }
 
-    public void atok(Mezo[][] terkep, int ky, int kx, int lepesszamlalo, Terkep atoke) {
+    void serultTars(Felfedezo felfedezo){
+        int randserult = r.nextInt(3);
+        felfedezo.getCsapattars().get(randserult).setSerulte(true);
+        if (random >= 1 && random <= 5) {
+            felfedezo.getCsapattars().remove(randserult);
+        }
+    }
+
+    void atok(Mezo[][] terkep, int ky, int kx, int lepesszamlalo, Terkep atoke) {
         if (random >= 0 && random <= 0) {
             int yIndex = 0, xIndex = 0;
             int tmp = 1, Ytmp, YtmpAlso = 0, Xtmp, XtmpAlso = 0;
@@ -98,7 +104,7 @@ public class Neverlucky {
         }
     }
 
-    public void lavaTerjedes(int lepesszamlalo, Mezo[][] terkep, Terkep atoke) {
+    void lavaTerjedes(int lepesszamlalo, Mezo[][] terkep, Terkep atoke) {
         if (lepesszamlalo == tmp2) {
             System.out.println("Vulkánkitörés!");
             for (int a = -3; a < 4; a++) {
@@ -169,7 +175,7 @@ public class Neverlucky {
         }
 
     }
-    public void gejzTerjedes(int lepesszamlalo, Mezo[][] terkep, Terkep atoke){
+    void gejzTerjedes(int lepesszamlalo, Mezo[][] terkep, Terkep atoke){
         if (lepesszamlalo == tmp2) {
             System.out.println("Gejzírkitörés!");
             terkep[gejzY][gejzX].setMezoTipus("  lap   ");

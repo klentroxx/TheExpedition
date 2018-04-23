@@ -1,14 +1,17 @@
 package terkep;
 
-import karakterek.Csapattars;
+import mentes.Betoltes;
+import mentes.Mentes;
 import targyak.Hasznal;
 import karakterek.Felfedezo;
+import targyak.Kincs;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;
-
+/**Terkep class. Rengeteg dologert felelos, itt csinaltam meg a terkep fajlbol valo beolvasasat, a terkep megrajzolasat,
+ * a kulonbozo tipusu mezok triggereinek aktivalasat, billentyukombinaciokat, a mezok lathatova tetelet.*/
 public class Terkep {
     private int[][] intTerkep = new int[10][10];
     private Mezo[][] terkep = new Mezo[intTerkep[0].length][intTerkep.length];
@@ -17,7 +20,6 @@ public class Terkep {
     private int ittakarakterX = 0;
     private int ittakarakterY = 0;
     private int lepesszamlalo = 0;
-    private double lepeskoltseg = 1;
     private boolean hajonVanE;
     private boolean hajoStop;
     private boolean vulkane;
@@ -25,14 +27,25 @@ public class Terkep {
     private Random r = new Random();
     private int rand = r.nextInt(100) + 1;
     private Neverlucky neverlucky = new Neverlucky();
-    private Csapattars csapattars = new Csapattars();
     private Hasznal hasznal = new Hasznal();
 
-    public void setVulkane(boolean vulkane) {
+    public Mezo[][] getTerkep() {
+        return terkep;
+    }
+
+    public int getIttakarakterX() {
+        return ittakarakterX;
+    }
+
+    public int getIttakarakterY() {
+        return ittakarakterY;
+    }
+
+    void setVulkane(boolean vulkane) {
         this.vulkane = vulkane;
     }
 
-    public void setGejzire(boolean gejzire) {
+    void setGejzire(boolean gejzire) {
         this.gejzire = gejzire;
     }
 
@@ -109,18 +122,21 @@ public class Terkep {
             System.out.println();
         }
     }
-    public void mezofelfedes(Felfedezo felfedezo){
-        if(felfedezo.getHatizsak().contains(null)){
-            hasznal.felderito(terkep, ittakarakterY, ittakarakterX);
-        } else {
-            for(int i = -1; i < 2; i++){
-                for (int j = -1; j < 2; j++){
-                    if(ittakarakterY + i >= 0 && ittakarakterX + j >= 0 && ittakarakterY + i < terkep[0].length && ittakarakterX + j < terkep.length) {
-                        terkep[ittakarakterY + i][ittakarakterX + j].setLathatoe(true);
+
+    private void mezofelfedes(Felfedezo felfedezo){
+        for (int i = 0; i < felfedezo.getCsapattars().size(); i++)
+            if(felfedezo.getCsapattars().get(i).getCsapattarsNev().equals("Felderito")){
+                hasznal.felderito(terkep, ittakarakterY, ittakarakterX);
+            } else {
+                for(int a = -1; a < 2; a++){
+                    for (int b = -1; b < 2; b++){
+                        if(ittakarakterY + a >= 0 && ittakarakterX + b >= 0 && ittakarakterY + a < terkep[0].length && ittakarakterX + b < terkep.length) {
+                            terkep[ittakarakterY + a][ittakarakterX + b].setLathatoe(true);
+                        }
                     }
                 }
             }
-        }
+
     }
 
     public void billentyuk(Felfedezo felfedezo, String billentyu) {
@@ -131,6 +147,8 @@ public class Terkep {
                     mezotpiusok(-1, 0, felfedezo);
                     if (gejzire) neverlucky.gejzTerjedes(lepesszamlalo, terkep, this);
                     if (vulkane) neverlucky.lavaTerjedes(lepesszamlalo, terkep, this);
+                    for (int i = 0; i < felfedezo.getCsapattars().size(); i++)
+                        if (felfedezo.getCsapattars().get(i).isSerulte()) neverlucky.serultTars(felfedezo);
                     lepesszamlalo++;
                 }
                 break;
@@ -140,6 +158,8 @@ public class Terkep {
                     mezotpiusok(0, -1, felfedezo);
                     if (gejzire) neverlucky.gejzTerjedes(lepesszamlalo, terkep, this);
                     if (vulkane) neverlucky.lavaTerjedes(lepesszamlalo, terkep, this);
+                    for (int i = 0; i < felfedezo.getCsapattars().size(); i++)
+                        if (felfedezo.getCsapattars().get(i).isSerulte()) neverlucky.serultTars(felfedezo);
                     lepesszamlalo++;
                 }
                 break;
@@ -149,6 +169,8 @@ public class Terkep {
                     mezotpiusok(1, 0, felfedezo);
                     if (gejzire) neverlucky.gejzTerjedes(lepesszamlalo, terkep, this);
                     if (vulkane) neverlucky.lavaTerjedes(lepesszamlalo, terkep, this);
+                    for (int i = 0; i < felfedezo.getCsapattars().size(); i++)
+                        if (felfedezo.getCsapattars().get(i).isSerulte()) neverlucky.serultTars(felfedezo);
                     lepesszamlalo++;
                 }
                 break;
@@ -158,25 +180,23 @@ public class Terkep {
                     mezotpiusok(0, 1, felfedezo);
                     if (gejzire) neverlucky.gejzTerjedes(lepesszamlalo, terkep, this);
                     if (vulkane) neverlucky.lavaTerjedes(lepesszamlalo, terkep, this);
+                    for (int i = 0; i < felfedezo.getCsapattars().size(); i++)
+                        if (felfedezo.getCsapattars().get(i).isSerulte()) neverlucky.serultTars(felfedezo);
                     lepesszamlalo++;
                 }
                 break;
+            case "m":
+                new Mentes(felfedezo, this);
+                break;
+            case "b":
+                new Betoltes(felfedezo, this);
+                break;
         }
-
-
-
-
-
-
-
-        System.out.println("HY: " + ittahajoY + " HX: " + ittahajoX + " KY: " + ittakarakterY +
-                " KX: " + ittakarakterX + " HStop: " + hajoStop + " HVane: " + hajonVanE +
-                " Random: " + rand + " Vulkane: " + vulkane + " Eletero: " + felfedezo.getEletero() + " Energia: " + felfedezo.getEnergia());
-
     }
 
     private void mezotpiusok(int ky, int kx, Felfedezo felfedezo){
         String mTip = terkep[ittakarakterY + ky][ittakarakterX + kx].getMezoTipus();
+        double lepeskoltseg = 1;
         switch (mTip){
             case " tenger ":
                 if(hajonVanE && !hajoStop){
@@ -236,20 +256,28 @@ public class Terkep {
                 if (terkep[ittakarakterY][ittakarakterX] == terkep[ittahajoY][ittahajoX]){
                     lepes1(ky, kx);
                     felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
+                    felfedezo.getKincstar().add(new Kincs(200, 200));
                     if (rand >= 1 && rand <= 20) neverlucky.atok(terkep, ittakarakterY, ittakarakterX, lepesszamlalo, this);
+                    if (rand >= 1 && rand <= 50) neverlucky.katasztrofa(felfedezo);
                 } else {
                     lepes2(ky, kx);
                     felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
+                    felfedezo.getKincstar().add(new Kincs(200, 200));
                     if (rand >= 1 && rand <= 20) neverlucky.atok(terkep, ittakarakterY, ittakarakterX, lepesszamlalo, this);
+                    if (rand >= 1 && rand <= 50) neverlucky.katasztrofa(felfedezo);
                 }
                 break;
             case "barlang ":
                 if (terkep[ittakarakterY][ittakarakterX] == terkep[ittahajoY][ittahajoX]){
                     lepes1(ky, kx);
                     felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
+                    felfedezo.getKincstar().add(new Kincs(200, 200));
+                    if (rand >= 1 && rand <= 50) neverlucky.katasztrofa(felfedezo);
                 } else {
                     lepes2(ky, kx);
                     felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
+                    felfedezo.getKincstar().add(new Kincs(200, 200));
+                    if (rand >= 1 && rand <= 50) neverlucky.katasztrofa(felfedezo);
                 }
                 break;
             case " bozot  ":
@@ -274,18 +302,22 @@ public class Terkep {
                 if (terkep[ittakarakterY][ittakarakterX] == terkep[ittahajoY][ittahajoX]){
                     lepes1(ky, kx);
                     felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
+                    if (felfedezo.getViszony() >= 2 && rand >= 1 && rand <= 20) hasznal.csapattarsajanl(felfedezo);
                 } else {
                     lepes2(ky, kx);
                     felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
+                    if (felfedezo.getViszony() >= 2 && rand >= 1 && rand <= 20) hasznal.csapattarsajanl(felfedezo);
                 }
                 break;
             case " lfalu  ":
                 if (terkep[ittakarakterY][ittakarakterX] == terkep[ittahajoY][ittahajoX]){
                     lepes1(ky, kx);
                     felfedezo.setEnergia(felfedezo.getEnergia() - (lepeskoltseg * 1.8));
+                    if (felfedezo.getViszony() >= 2 && rand >= 1 && rand <= 20) hasznal.csapattarsajanl(felfedezo);
                 } else {
                     lepes2(ky, kx);
                     felfedezo.setEnergia(felfedezo.getEnergia() - (lepeskoltseg * 1.8));
+                    if (felfedezo.getViszony() >= 2 && rand >= 1 && rand <= 20) hasznal.csapattarsajanl(felfedezo);
                 }
                 break;
             case " oltar  ":
@@ -293,10 +325,12 @@ public class Terkep {
                     lepes1(ky, kx);
                     felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
                     felfedezo.setViszony(felfedezo.getViszony() - 2);
+                    felfedezo.getKincstar().add(new Kincs(200, 200));
                 } else {
                     lepes2(ky, kx);
                     felfedezo.setEnergia(felfedezo.getEnergia() - lepeskoltseg);
                     felfedezo.setViszony(felfedezo.getViszony() - 2);
+                    felfedezo.getKincstar().add(new Kincs(200, 200));
                 }
                 break;
             case " loltar ":
@@ -304,10 +338,12 @@ public class Terkep {
                     lepes1(ky, kx);
                     felfedezo.setEnergia(felfedezo.getEnergia() - (lepeskoltseg * 1.8));
                     felfedezo.setViszony(felfedezo.getViszony() - 2);
+                    felfedezo.getKincstar().add(new Kincs(200, 200));
                 } else {
                     lepes2(ky, kx);
                     felfedezo.setEnergia(felfedezo.getEnergia() - (lepeskoltseg * 1.8));
                     felfedezo.setViszony(felfedezo.getViszony() - 2);
+                    felfedezo.getKincstar().add(new Kincs(200, 200));
                 }
                 break;
             case " aranyp ":
@@ -361,4 +397,27 @@ public class Terkep {
         terkep[ittakarakterY - ky][ittakarakterX - kx].setIttvagyunke(false);
     }
 
+    public int getIttahajoX() {
+        return ittahajoX;
+    }
+
+    public void setIttahajoX(int ittahajoX) {
+        this.ittahajoX = ittahajoX;
+    }
+
+    public int getIttahajoY() {
+        return ittahajoY;
+    }
+
+    public void setIttahajoY(int ittahajoY) {
+        this.ittahajoY = ittahajoY;
+    }
+
+    public void setIttakarakterX(int ittakarakterX) {
+        this.ittakarakterX = ittakarakterX;
+    }
+
+    public void setIttakarakterY(int ittakarakterY) {
+        this.ittakarakterY = ittakarakterY;
+    }
 }

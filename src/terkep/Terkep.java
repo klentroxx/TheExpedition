@@ -205,7 +205,7 @@ public class Terkep {
                     ittahajoX += kx;
                     ittakarakterX += kx;
                     terkep[ittakarakterY][ittakarakterX].setIttvagyunke(true);
-                    terkep[ittahajoY][ittahajoX]. setMezoTipus("  hajo  ");
+                    terkep[ittahajoY][ittahajoX].setMezoTipus("  hajo  ");
                     terkep[ittakarakterY - ky][ittakarakterX - kx].setIttvagyunke(false);
                     terkep[ittahajoY - ky][ittahajoX - kx].setMezoTipus(" tenger ");
                 }

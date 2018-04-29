@@ -29,7 +29,7 @@ class Neverlucky {
     }
 
     void atok(Mezo[][] terkep, int ky, int kx, int lepesszamlalo, Terkep atoke) {
-        if (random >= 0 && random <= 0) {
+        if (random >= 1 && random <= 35) {
             int yIndex = 0, xIndex = 0;
             int tmp = 1, Ytmp, YtmpAlso = 0, Xtmp, XtmpAlso = 0;
             if (ky + yIndex >= 0 && ky + yIndex < terkep[0].length && kx + xIndex >= 0 && kx + xIndex < terkep.length) {
@@ -67,7 +67,7 @@ class Neverlucky {
             atoke.setVulkane(true);
             lavaTerjedes(lepesszamlalo, terkep, atoke);
 
-        } else if (random >= 1 && random <= 100) {
+        } else if (random >= 36 && random <= 100) {
             int yIndex = 0, xIndex = 0;
             int tmp = 1, Ytmp, YtmpAlso = 0, Xtmp, XtmpAlso = 0;
 

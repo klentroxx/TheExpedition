@@ -1,12 +1,15 @@
+import grafika.Ablakbetolto;
 import karakterek.Ellenfelek;
 import terkep.Terkep;
 import karakterek.Felfedezo;
 import targyak.Hasznal;
 
+import java.awt.*;
 import java.util.Scanner;
 /** Kontroller class. A program teljes mukodeset ez kontrollalja.*/
 class Kontroller{
     void start(){
+        Ablakbetolto ablak = new Ablakbetolto("The Expedition", 800, 600);
         int kuldetesek = 5;
         Felfedezo jatekos = new Felfedezo("", 100, 100, 250, 0, 3);
         Ellenfelek ellenfelek = new Ellenfelek();
